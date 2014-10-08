@@ -9,6 +9,7 @@ using System.Collections.Generic;
 using TShockAPI.DB;
 using System.Linq;
 using System.Diagnostics;
+using System.IO;
 
 namespace extrarest
 {
@@ -36,9 +37,31 @@ namespace extrarest
         public override void Initialize()
         {
             TShock.RestApi.Register(new RestCommand("/staff", Staff));
+            TShock.RestApi.Register(new RestCommand("/whitelist", WhiteList));
         }
 
-        public static object Staff(RestVerbs verbs, IParameterCollection parameters)
+        public static RestObject WhiteList(RestVerbs verbs, IParameterCollection parameters)
+        {
+            string[] whitelist = new[] { "" };
+            try
+            {
+                using (StreamReader sr = new StreamReader(File.Open(Path.Combine(TShock.SavePath, "whitelist.txt"), FileMode.Open)))
+                {
+                    whitelist = sr.ReadToEnd().Split(new[] { "\r\n" }, StringSplitOptions.RemoveEmptyEntries);
+                }
+
+            }
+            catch
+            {
+                whitelist = new[] { "Whitelist not found!" };
+            }
+            return new RestObject()
+            {
+                    { "WhiteList", whitelist}
+            };
+        }
+
+        public static RestObject Staff(RestVerbs verbs, IParameterCollection parameters)
         {
             GroupManager groupmanager = new GroupManager(TShock.DB);
             UserManager usermanager = new UserManager(TShock.DB);

@@ -2,6 +2,8 @@ ExtraRest
 =========
 
 Extra Rest Api commands for TShock
+<br>
+(Example: 127.0.0.1:7878/staff)
 
 
 <h1>Endpoints:</h1>

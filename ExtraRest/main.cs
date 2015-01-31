@@ -37,10 +37,11 @@ namespace extrarest
         public override void Initialize()
         {
             TShock.RestApi.Register(new RestCommand("/staff", Staff));
+            TShock.RestApi.Register(new RestCommand("/staff", Staff));
             TShock.RestApi.Register(new RestCommand("/whitelist", WhiteList));
         }
 
-        public static RestObject WhiteList(RestVerbs verbs, IParameterCollection parameters)
+        public static RestObject WhiteList(RestRequestArgs args)
         {
             string[] whitelist = new[] { "" };
             try
@@ -61,7 +62,7 @@ namespace extrarest
             };
         }
 
-        public static RestObject Staff(RestVerbs verbs, IParameterCollection parameters)
+        public static RestObject Staff(RestRequestArgs args)
         {
             GroupManager groupmanager = new GroupManager(TShock.DB);
             UserManager usermanager = new UserManager(TShock.DB);

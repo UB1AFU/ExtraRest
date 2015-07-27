@@ -13,7 +13,7 @@ using System.IO;
 
 namespace extrarest
 {
-    [ApiVersion(1, 16)]
+    [ApiVersion(1, 20)]
     public class ExtraRest : TerrariaPlugin
     {
         public override Version Version
@@ -36,7 +36,6 @@ namespace extrarest
 
         public override void Initialize()
         {
-            TShock.RestApi.Register(new RestCommand("/staff", Staff));
             TShock.RestApi.Register(new RestCommand("/staff", Staff));
             TShock.RestApi.Register(new RestCommand("/whitelist", WhiteList));
         }
